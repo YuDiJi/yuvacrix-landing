@@ -17,8 +17,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 // ── Countdown ────────────────────────────────────────────────
-const TARGET = new Date();
-TARGET.setDate(TARGET.getDate() + 60);
+const TARGET = new Date("2026-08-01T00:00:00+05:30");
 
 function useCountdown() {
   const [timeLeft, setTimeLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
