@@ -3,6 +3,19 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { IMAGES } from "./constants";
 import Particles from "./Particles";
 
+// Tailwind sr-only equivalent as inline style (add to your global CSS instead if preferred)
+const srOnly: React.CSSProperties = {
+  position: "absolute",
+  width: "1px",
+  height: "1px",
+  padding: 0,
+  margin: "-1px",
+  overflow: "hidden",
+  clip: "rect(0,0,0,0)",
+  whiteSpace: "nowrap",
+  border: 0,
+};
+
 const Scene1: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -16,15 +29,11 @@ const Scene1: React.FC = () => {
     damping: 25,
   });
 
-  // Parallax: image moves down as user scrolls
   const yImg = useTransform(springProgress, [0, 1], ["0%", "28%"]);
-  // Blur image as scroll progresses
   const blurVal = useTransform(springProgress, [0, 1], [0, 8]);
   const filterVal = useTransform(blurVal, (v) => `blur(${v}px)`);
-  // Scale image via separate motion value (no GSAP conflict)
   const scaleImg = useTransform(springProgress, [0, 1], [1, 1.5]);
 
-  // Title fade — use raw scrollYProgress for sharp response
   const titleOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
   const titleY = useTransform(scrollYProgress, [0, 0.4], [0, -70]);
 
@@ -35,51 +44,63 @@ const Scene1: React.FC = () => {
       className="relative vignette overflow-hidden"
       style={{ height: "140vh" }}
     >
-      {/* Parallax + blur wrapper — framer-motion owns y and filter */}
       <motion.div
         className="absolute inset-0 w-full h-full"
         style={{ y: yImg, filter: filterVal, transformOrigin: "center center" }}
       >
-        {/* Scale wrapper — framer-motion owns scale; no GSAP on this element */}
         <motion.div
           className="s1-img-scale w-full h-full"
           style={{ scale: scaleImg, transformOrigin: "center center" }}
         >
           <img
             src={IMAGES.sunrise}
-            alt="Indian gully cricket maidan at sunrise"
+            // ── SEO: descriptive alt with product + location keywords ──
+            alt="Gully cricket match at sunrise — YuvaCrix cricket scoring app"
             className="w-full h-full object-cover"
           />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#060B1F]" />
       </motion.div>
 
-      {/* Particles */}
       <Particles count={50} color="#F59E0B" />
 
-      {/* Sticky title — framer-motion owns opacity and y; no GSAP */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center z-10 px-6">
         <motion.div
           className="s1-title text-center"
           style={{ opacity: titleOpacity, y: titleY }}
         >
           <p className="font-display text-white/50 text-xs md:text-sm uppercase tracking-[0.3em] mb-4">
+            {/* ── SEO: screen-reader / crawler label with product keywords ── */}
+            <span style={srOnly}>YuvaCrix — </span>
             01 — Prologue
           </p>
+
           <h1
             className="font-display font-black uppercase leading-none text-balance"
             style={{ fontSize: "clamp(3rem, 12vw, 6rem)" }}
           >
+            {/*
+             * The sr-only span is read by Google but invisible to users.
+             * It anchors the H1 to your core product keywords without
+             * changing a single pixel of the visual design.
+             */}
+            <span style={srOnly}>YuvaCrix Cricket Scoring App — </span>
             <span className="text-white">Every run remembered.</span>
             <br />
             <span className="text-sky glow-sky">Every legend recorded.</span>
           </h1>
+
+          {/* ── SEO: replace vague tagline with a keyword-rich subtitle ── */}
           <p className="mt-6 text-white/50 font-body text-base md:text-lg tracking-wide">
-            Scroll. Let it play out.
+            {/*
+             * Visible text now doubles as your meta-description equivalent.
+             * Users read it as brand copy; Google reads it as product description.
+             */}
+            Organise cricket tournaments, track live scores, view scorecards and
+            celebrate player awards.
           </p>
         </motion.div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-10 flex flex-col items-center gap-2">
           <span className="scroll-bounce text-white/40 text-2xl select-none">
             ↓
