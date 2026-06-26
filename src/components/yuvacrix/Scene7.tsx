@@ -6,7 +6,7 @@ import { IMAGES, FORM_ENTRIES } from "./constants";
 import Particles from "./Particles";
 
 const GOOGLE_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfxYuvaCrixPlaceholder/formResponse";
+  "https://docs.google.com/forms/d/e/1FAIpQLSfHchMeVwFQFxCbf9VCIgN_GtikFd6m0x4ryDdGT5ZbZXS_TQ/formResponse";
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),

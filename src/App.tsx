@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ReactGA from "react-ga4";
 
 import MouseLight from "./components/yuvacrix/MouseLight";
 import Nav from "./components/yuvacrix/Nav";
@@ -152,6 +153,29 @@ const App: React.FC = () => {
     }, rootRef);
 
     return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    let hasTracked = false;
+
+    const handleScroll = () => {
+      if (hasTracked) return;
+
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollPosition >= documentHeight - 50) {
+        hasTracked = true;
+
+        ReactGA.event("landing_page_completed", {
+          page: window.location.pathname,
+        });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (

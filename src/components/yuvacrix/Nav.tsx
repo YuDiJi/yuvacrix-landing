@@ -22,10 +22,15 @@ const Nav: React.FC = () => {
     >
       {/* Logo */}
       <button
-        className="font-display text-2xl font-black uppercase tracking-widest text-white"
+        className="flex items-center h-14 overflow-hidden"
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="YuvaCrix home"
       >
-        Yuva<span className="text-sky">Crix</span>
+        <img
+          src={"../../../public/logo_dark_croped.png"}
+          alt="yuvacrix logo"
+          className="w-32 h-18"
+        />
       </button>
 
       {/* Desktop links */}

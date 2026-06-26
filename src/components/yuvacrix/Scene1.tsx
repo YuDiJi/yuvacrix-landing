@@ -68,7 +68,7 @@ const Scene1: React.FC = () => {
           </p>
           <h1
             className="font-display font-black uppercase leading-none text-balance"
-            style={{ fontSize: "clamp(3rem, 12vw, 7rem)" }}
+            style={{ fontSize: "clamp(3rem, 12vw, 6rem)" }}
           >
             <span className="text-white">Every run remembered.</span>
             <br />
