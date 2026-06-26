@@ -293,7 +293,7 @@ const Scene7: React.FC = () => {
           {["WhatsApp"].map((s) => (
             <a
               key={s}
-              href="#"
+              href="https://wa.me/8591771137"
               className="text-white/40 hover:text-white font-body text-sm transition-colors uppercase tracking-widest"
             >
               {s}
