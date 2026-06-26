@@ -27,7 +27,7 @@ const Nav: React.FC = () => {
         aria-label="YuvaCrix home"
       >
         <img
-          src={"../../../public/logo_dark_croped.png"}
+          src={"/logo_dark_croped.png"}
           alt="yuvacrix logo"
           className="w-32 h-18"
         />
